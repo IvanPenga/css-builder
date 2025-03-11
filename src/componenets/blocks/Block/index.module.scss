@@ -1,0 +1,67 @@
+@use "../../configuration.module.scss";
+@use "sass:math";
+
+.block {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.block div {
+  position: absolute;
+}
+
+$width: configuration.$regular-block-size;
+
+.regular {
+  position: absolute;
+  transform-style: preserve-3d;
+
+  width: $width;
+  height: $width;
+
+  &:hover div {
+    filter: brightness(0.7);
+  }
+
+
+  & > div {
+    width: $width;
+    height: $width;
+    position: absolute;
+
+    border: 1px solid lightgray;
+
+    backface-visibility: hidden;
+    background-size: $width $width;
+  }
+
+  .front {
+    transform: translateZ(math.div($width, 2px));
+    rotate: x 0deg;
+  }
+
+  .back {
+    transform: translateZ(math.div($width, 2px));
+    rotate: y 180deg;
+  }
+
+  .left {
+    transform: translateZ(math.div($width, 2));
+    rotate: y 90deg;
+  }
+
+  .right {
+    transform: translateZ(math.div($width, 2px));
+    rotate: y -90deg;
+  }
+
+  .top {
+    transform: translateZ(math.div($width, 2px));
+    rotate: x 90deg;
+  }
+
+  .bottom {
+    transform: translateZ(math.div($width, 2));
+    rotate: x -90deg;
+  }
+}

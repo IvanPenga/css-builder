@@ -1,0 +1,12 @@
+.hiddenLayerLabel {
+  display: flex;
+  font-size: 36px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100px;
+
+  input {
+    width: 40px;
+    height: 40px;
+  }
+}
