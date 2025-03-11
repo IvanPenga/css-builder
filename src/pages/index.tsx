@@ -5,7 +5,7 @@ import { BlockSelector } from "@/componenets/block-selector/SelectableBlock";
 import { HiddenLayers } from "@/componenets/hidden-layers/HiddenLayers";
 
 function Home() {
-  const q = 3;
+  const q = 4;
 
   const [hiddenLayers, setHiddenLayers] = useState<Set<number>>(new Set());
 
