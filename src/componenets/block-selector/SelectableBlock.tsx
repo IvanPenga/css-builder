@@ -1,18 +1,18 @@
 import React from "react";
 import { SelectableBlock } from "./BlockSelector";
-import { blockTypes } from "../textures/textures";
 import { useBuildingContext } from "../scenes/BuildingContext";
+import { models } from "../models/model/models";
 
 export function BlockSelector() {
-  const { selectedBlockTexture } = useBuildingContext();
+  const { selectedModel } = useBuildingContext();
 
   return (
     <aside className="absolute z-10">
       <div>
-        {selectedBlockTexture?.name}
+        {selectedModel.name}
       </div>
       <div className="flex flex-col">
-        {blockTypes.map((blockType) => <SelectableBlock key={blockType.name} block={blockType} />)}
+        {models.map((model) => <SelectableBlock key={JSON.stringify(model)} model={model} />)}
       </div>
     </aside>
   );

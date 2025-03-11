@@ -1,26 +1,26 @@
 import React, { CSSProperties } from 'react';
 import { useBuildingContext } from '../scenes/BuildingContext';
-import { TexturedBlock } from '../textures/textures';
+import { Model } from '../models/model/Model';
 
 type SelectableBlockProperties = {
-  block: TexturedBlock;
+  model: Model;
 }
 
-export function SelectableBlock({ block }: SelectableBlockProperties) {
-  const { setSelectedBlockTexture } = useBuildingContext();
+export function SelectableBlock({ model }: SelectableBlockProperties) {
+  const { setSelectedModel } = useBuildingContext();
 
   function onClick() {
-    setSelectedBlockTexture(block);
+    setSelectedModel(model);
   }
 
   const style: CSSProperties = {
-    backgroundImage: block.textureTop,
+    backgroundImage: Array.from(model.blocks.values())[0].textureTop,
     backgroundSize: 'cover',
   }
 
   return (
     <button style={style} className='w-32 h-32 border-2 text-2xl font-bold' onClick={onClick}>
-      {block.name}
+      {model.name}
     </button>
   )
 }

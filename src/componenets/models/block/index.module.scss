@@ -1,18 +1,9 @@
 @use "../../configuration.module.scss";
 @use "sass:math";
 
-.block {
-  position: absolute;
-  transform-style: preserve-3d;
-}
-
-.block div {
-  position: absolute;
-}
-
 $width: configuration.$regular-block-size;
 
-.regular {
+.block {
   position: absolute;
   transform-style: preserve-3d;
 

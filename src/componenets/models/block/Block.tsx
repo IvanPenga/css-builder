@@ -1,18 +1,15 @@
 import React, { CSSProperties, MouseEventHandler } from "react";
 import styles from "./index.module.scss";
-import { translate3d } from "../transformations";
 import classNames from "classnames";
-import { Texture } from "@/componenets/textures/textures";
+import type { Block } from "../block-types";
+import { translate3d } from "@/componenets/scene/transformations";
 
-type BlockProperties = Texture & {
-  x: number;
-  y: number;
-  z: number;
+type BlockProperties = Block & {
   className?: string;
   onClick: MouseEventHandler;
 }
 
-export function RegularBlock({ x, y, z, className, onClick, textureBottom, textureTop, textureSide }: BlockProperties) {
+export function Block({ x, y, z, className, onClick, textureBottom, textureTop, textureSide }: BlockProperties) {
   const translate3dStyle = translate3d(x, y, z);
 
   const style: CSSProperties = {
@@ -32,7 +29,7 @@ export function RegularBlock({ x, y, z, className, onClick, textureBottom, textu
   }
 
   return (
-    <div style={style} className={classNames(styles.regular, className)} onClick={onClick}>
+    <div style={style} className={classNames(styles.block, className)} onClick={onClick}>
       <div style={styleSide} className={styles.front} ></div>
       <div style={styleSide} className={styles.back} ></div>
       <div style={styleBottom} className={styles.bottom} ></div>

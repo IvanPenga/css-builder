@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { RegularBlock } from "../blocks/Block/RegularBlock";
-import { Scene } from "../blocks/Scene";
+import { Scene } from "../scene/Scene";
 import styles from "./index.module.scss";
 import { createBlocks } from "./blocks";
 import { useBuildingContext } from "../scenes/BuildingContext";
 import { Rotateable } from "../rotateable/Rotateable";
+import { Block } from "../models/block/Block";
+import { BlockMap } from "../models/block/BlockMap";
 
 type BuildingSpaceProperties = {
   width: number;
@@ -17,9 +18,9 @@ export function BuildingSpace({
   depth,
   width,
   height,
-  hiddenLayers = []
+  hiddenLayers = [],
 }: BuildingSpaceProperties) {
-  const { selectedBlockTexture } = useBuildingContext();
+  const { selectedModel } = useBuildingContext();
 
   const [blocks, setBlocks] = useState(() =>
     createBlocks(width, height, depth)
@@ -27,18 +28,16 @@ export function BuildingSpace({
 
   function handleClick(x: number, y: number, z: number) {
     setBlocks((previousBlocks) => {
-      console.log("gettin", previousBlocks);
+      selectedModel.blocks.forEach((model) => {
+        previousBlocks.setBlock({
+          ...model,
+          x: x - model.x,
+          y: y - model.y,
+          z: z - model.z,
+        });
+      });
 
-      const block = previousBlocks.get(`${x}-${y}-${z}`);
-      if (!block) return previousBlocks;
-
-      block.textureSide = selectedBlockTexture.textureSide;
-      block.textureTop = selectedBlockTexture.textureTop;
-      block.textureBottom = selectedBlockTexture.textureBottom;
-
-      console.log(block);
-
-      return new Map(previousBlocks);
+      return new BlockMap(previousBlocks);
     });
   }
 
@@ -47,7 +46,7 @@ export function BuildingSpace({
       <Rotateable>
         {Array.from(blocks.values()).map(
           ({ x, y, z, textureSide, textureBottom, textureTop }) => (
-            <RegularBlock
+            <Block
               x={x - width / 2}
               y={y - height / 2}
               z={z - depth / 2 + 0.5}

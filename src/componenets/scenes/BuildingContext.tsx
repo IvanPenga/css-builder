@@ -1,19 +1,29 @@
 import React, { PropsWithChildren, useContext, useState } from "react";
-import { none } from "../textures/textures";
+import { Model } from "../models/model/Model";
+import { none } from "../models/model/models";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const BuildingContext = React.createContext({} as any);
+type Context = {
+  selectedModel: Model;
+  setSelectedModel: React.Dispatch<React.SetStateAction<Model>>;
+}
+
+const defaultContext: Context = {
+  selectedModel: none,
+  setSelectedModel: () => none,
+}
+
+export const BuildingContext = React.createContext(defaultContext);
 
 export const useBuildingContext = () => {
   return useContext(BuildingContext);
 }
 
 export const BuildingContextProvider = ({ children }: PropsWithChildren) => {
-  const [selectedBlockTexture, setSelectedBlockTexture] = useState(none);
+  const [selectedModel, setSelectedModel] = useState<Model>(none);
 
   const context = {
-    selectedBlockTexture,
-    setSelectedBlockTexture,
+    selectedModel,
+    setSelectedModel,
   };
 
   return (
