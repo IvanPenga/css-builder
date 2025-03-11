@@ -24,4 +24,10 @@ export const wood: Texture = {
   textureBottom: 'url("textures/wood-base.jpg")',
 }
 
-export const textures = { none, grass, dirt, wood }
+export const leaves: Texture = {
+  textureTop: 'url("textures/leaves.webp")',
+  textureSide: 'url("textures/leaves.webp")',
+  textureBottom: 'url("textures/leaves.webp")',
+}
+
+export const textures = { none, grass, dirt, wood, leaves }

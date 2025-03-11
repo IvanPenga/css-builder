@@ -40,6 +40,8 @@ export function BuildingSpace({
         });
       });
 
+      console.log(previousBlocks);
+
       return new BlockMap(previousBlocks);
     });
   }

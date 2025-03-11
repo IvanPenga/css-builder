@@ -5,7 +5,7 @@ import { BlockSelector } from "@/componenets/block-selector/SelectableBlock";
 import { HiddenLayers } from "@/componenets/hidden-layers/HiddenLayers";
 
 function Home() {
-  const q = 4;
+  const q = 5;
 
   const [hiddenLayers, setHiddenLayers] = useState<Set<number>>(new Set());
   const [isMeshVisible, setIsMeshVisible] = useState(true);
