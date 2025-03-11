@@ -6,12 +6,14 @@ import { useBuildingContext } from "../scenes/BuildingContext";
 import { Rotateable } from "../rotateable/Rotateable";
 import { Block } from "../models/block/Block";
 import { BlockMap } from "../models/block/BlockMap";
+import classNames from "classnames";
 
 type BuildingSpaceProperties = {
   width: number;
   height: number;
   depth: number;
   hiddenLayers: number[];
+  showMesh: boolean;
 };
 
 export function BuildingSpace({
@@ -19,6 +21,7 @@ export function BuildingSpace({
   width,
   height,
   hiddenLayers = [],
+  showMesh,
 }: BuildingSpaceProperties) {
   const { selectedModel } = useBuildingContext();
 
@@ -43,7 +46,7 @@ export function BuildingSpace({
 
   return (
     <Scene>
-      <Rotateable>
+      <Rotateable className={classNames(styles.mesh, { [styles.visibleMesh]: showMesh })}>
         {Array.from(blocks.values()).map(
           ({ x, y, z, textureSide, textureBottom, textureTop }) => (
             <Block

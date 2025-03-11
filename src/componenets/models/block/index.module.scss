@@ -10,17 +10,10 @@ $width: configuration.$regular-block-size;
   width: $width;
   height: $width;
 
-  &:hover div {
-    filter: brightness(0.7);
-  }
-
-
-  & > div {
+  div {
     width: $width;
     height: $width;
     position: absolute;
-
-    border: 1px solid lightgray;
 
     backface-visibility: hidden;
     background-size: $width $width;

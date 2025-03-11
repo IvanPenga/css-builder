@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import styles from "./index.module.scss";
+import classNames from "classnames";
 
 function getRotation(transform: string) {
   const result = new RegExp(/rotateX\((-?\d+)deg\) rotateY\((-?\d+)deg\)/).exec(
@@ -9,7 +10,11 @@ function getRotation(transform: string) {
   return { x: Number(result[1]), y: Number(result[2]) };
 }
 
-export function Rotateable({ children }: PropsWithChildren) {
+type RotateableProperties = {
+  className?: string;
+}
+
+export function Rotateable({ children, className }: PropsWithChildren<RotateableProperties>) {
   const ref = useRef<HTMLDivElement>(null);
 
   const [mouseDown, setMouseDown] = useState(false);
@@ -47,7 +52,7 @@ export function Rotateable({ children }: PropsWithChildren) {
     <div
       ref={ref}
       onMouseDown={onMouseDown}
-      className={styles.rotateable}
+      className={classNames(styles.rotateable, className)}
       style={{ transform: "rotateX(0deg) rotateY(0deg)" }}
     >
       {children}

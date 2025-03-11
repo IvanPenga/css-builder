@@ -8,12 +8,23 @@ function Home() {
   const q = 4;
 
   const [hiddenLayers, setHiddenLayers] = useState<Set<number>>(new Set());
+  const [isMeshVisible, setIsMeshVisible] = useState(true);
 
   return (
     <main className="w-full relative h-[900px]">
       <BuildingContextProvider>
+        <label>
+          Show mesh
+          <input defaultChecked={true} onChange={() => setIsMeshVisible((prev) => !prev)} type="checkbox" />
+        </label>
         <BlockSelector />
-        <BuildingSpace depth={q} height={q} width={q} hiddenLayers={Array.from(hiddenLayers)} />
+        <BuildingSpace
+          depth={q}
+          width={q}
+          height={q}
+          showMesh={isMeshVisible}
+          hiddenLayers={Array.from(hiddenLayers)}
+        />
         <HiddenLayers layers={q} setHiddenLayers={setHiddenLayers} />
       </BuildingContextProvider>
     </main>
@@ -21,5 +32,3 @@ function Home() {
 }
 
 export default Home;
-
-
